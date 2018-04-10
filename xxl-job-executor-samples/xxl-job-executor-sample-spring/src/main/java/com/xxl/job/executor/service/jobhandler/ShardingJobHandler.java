@@ -17,6 +17,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class ShardingJobHandler extends IJobHandler {
 
+	/**
+	 * 指示当前数据库数据读取位置
+	 */
+	private static volatile Integer cursor = 0;
+
 	@Override
 	public ReturnT<String> execute(String param) throws Exception {
 
@@ -32,6 +37,9 @@ public class ShardingJobHandler extends IJobHandler {
 				XxlJobLogger.log("第 {0} 片, 忽略", i);
 			}
 		}
+
+		cursor += 100;
+		XxlJobLogger.log("数据读取到了" + cursor);
 
 		return SUCCESS;
 	}
