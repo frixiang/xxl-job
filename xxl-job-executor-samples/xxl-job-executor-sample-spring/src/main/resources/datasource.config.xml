@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--TMS数据源-->
+    <bean id="dataSource_tms" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="url" value="${url_local}"/>
+        <property name="username" value="${user_local}"/>
+        <property name="password" value="${password_local}"/>
+        <property name="initialSize" value="${tms.initialSize}" />
+        <property name="minIdle" value="${tms.minIdle}" />
+        <property name="maxActive" value="${tms.maxActive}" />
+        <property name="maxWait" value="${tms.maxWait}" />
+        <property name="timeBetweenEvictionRunsMillis" value="${tms.timeBetweenEvictionRunsMillis}" />
+        <property name="minEvictableIdleTimeMillis" value="${tms.minEvictableIdleTimeMillis}" />
+        <property name="validationQuery" value="SELECT 'x'" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+        <property name="poolPreparedStatements" value="false" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="${tms.maxPoolPreparedStatementPerConnectionSize}" />
+    </bean>
+</beans>

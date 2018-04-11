@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxl.job.model.TmsOrderInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.xxl.job.model.TmsOrderInfo" >
+    <id column="tms_order_id" property="tmsOrderId" jdbcType="INTEGER" />
+    <result column="waybill_no" property="waybillNo" jdbcType="CHAR" />
+    <result column="customer_order_id" property="customerOrderId" jdbcType="INTEGER" />
+    <result column="tracking_no" property="trackingNo" jdbcType="VARCHAR" />
+    <result column="depot_id" property="depotId" jdbcType="INTEGER" />
+    <result column="order_type" property="orderType" jdbcType="TINYINT" />
+    <result column="rate" property="rate" jdbcType="DECIMAL" />
+    <result column="currency" property="currency" jdbcType="VARCHAR" />
+    <result column="cod_amount" property="codAmount" jdbcType="DECIMAL" />
+    <result column="shipping_fee" property="shippingFee" jdbcType="DECIMAL" />
+    <result column="shipping_id" property="shippingId" jdbcType="INTEGER" />
+    <result column="shipping_status" property="shippingStatus" jdbcType="TINYINT" />
+    <result column="customer_account" property="customerAccount" jdbcType="VARCHAR" />
+    <result column="route_code" property="routeCode" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="INTEGER" />
+    <result column="shipped_time" property="shippedTime" jdbcType="INTEGER" />
+    <result column="departure_time" property="departureTime" jdbcType="INTEGER" />
+    <result column="arrival_time" property="arrivalTime" jdbcType="INTEGER" />
+    <result column="delivered_time" property="deliveredTime" jdbcType="INTEGER" />
+    <result column="gmt_created" property="gmtCreated" jdbcType="INTEGER" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="INTEGER" />
+    <result column="operator_id" property="operatorId" jdbcType="INTEGER" />
+    <result column="site_id" property="siteId" jdbcType="TINYINT" />
+    <result column="customer_order_sn" property="customerOrderSn" jdbcType="VARCHAR" />
+    <result column="language_site" property="languageSite" jdbcType="TINYINT" />
+    <result column="order_amount" property="orderAmount" jdbcType="DECIMAL"/>
+    <result column="goods_num" property="goodsNum" jdbcType="INTEGER"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tms_order_id, waybill_no, customer_order_id, tracking_no, depot_id, order_type,shipping_id,
+    rate, currency, cod_amount, shipping_fee, shipping_status, customer_account,
+    route_code, created_time, shipped_time, departure_time, arrival_time, delivered_time,
+    gmt_created, gmt_modified, operator_id,site_id,customer_order_sn,language_site,order_amount,
+    goods_num
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tms_order_info
+    where tms_order_id = #{tmsOrderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tms_order_info
+    where tms_order_id = #{tmsOrderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xxl.job.model.TmsOrderInfo">
+    insert into tms_order_info (tms_order_id, waybill_no, customer_order_id, tracking_no, depot_id,
+      order_type,  rate,
+      currency, cod_amount, shipping_fee, shipping_status, customer_account,
+      route_code, created_time, shipped_time, 
+      departure_time, arrival_time, delivered_time, 
+      gmt_created, gmt_modified, operator_id,site_id,customer_order_sn,language_site,order_amount,
+      goods_num
+      )
+    values (#{tmsOrderId,jdbcType=INTEGER}, #{waybillNo,jdbcType=CHAR}, #{customerOrderId,jdbcType=INTEGER}, 
+      #{trackingNo,jdbcType=VARCHAR}, #{depotId,jdbcType=INTEGER},
+      #{orderType,jdbcType=TINYINT}, #{rate,jdbcType=DECIMAL},
+      #{currency,jdbcType=VARCHAR}, #{codAmount,jdbcType=DECIMAL}, #{shippingFee,jdbcType=DECIMAL}, #{shippingStatus,jdbcType=TINYINT}, #{customerAccount,jdbcType=VARCHAR},
+      #{routeCode,jdbcType=VARCHAR}, #{createdTime,jdbcType=INTEGER}, #{shippedTime,jdbcType=INTEGER}, 
+      #{departureTime,jdbcType=INTEGER}, #{arrivalTime,jdbcType=INTEGER}, #{deliveredTime,jdbcType=INTEGER}, 
+      #{gmtCreated,jdbcType=INTEGER}, #{gmtModified,jdbcType=INTEGER}, #{operatorId,jdbcType=INTEGER},#{siteId,jdbcType=TINYINT},#{customerOrderSn,jdbcType=VARCHAR}
+      ,#{languageSite,jdbcType=TINYINT},#{orderAmount,jdbcType=DECIMAL},
+      #{goodsNum, jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxl.job.model.TmsOrderInfo" useGeneratedKeys="true" keyProperty="tmsOrderId">
+    insert into tms_order_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tmsOrderId != null" >
+        tms_order_id,
+      </if>
+      <if test="waybillNo != null" >
+        waybill_no,
+      </if>
+      <if test="shippingId != null" >
+        shipping_id,
+      </if>
+      <if test="customerOrderId != null" >
+        customer_order_id,
+      </if>
+      <if test="trackingNo != null" >
+        tracking_no,
+      </if>
+      <if test="depotId != null" >
+        depot_id,
+      </if>
+      <if test="orderType != null" >
+        order_type,
+      </if>
+      <if test="rate != null" >
+        rate,
+      </if>
+      <if test="currency != null" >
+        currency,
+      </if>
+      <if test="codAmount != null" >
+        cod_amount,
+      </if>
+      <if test="shippingFee != null">
+        shipping_fee,
+      </if>
+      <if test="shippingStatus != null" >
+        shipping_status,
+      </if>
+      <if test="customerAccount != null" >
+        customer_account,
+      </if>
+      <if test="routeCode != null" >
+        route_code,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="shippedTime != null" >
+        shipped_time,
+      </if>
+      <if test="departureTime != null" >
+        departure_time,
+      </if>
+      <if test="arrivalTime != null" >
+        arrival_time,
+      </if>
+      <if test="deliveredTime != null" >
+        delivered_time,
+      </if>
+      <if test="gmtCreated != null" >
+        gmt_created,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="tax != null" >
+        tax,
+      </if>
+      <if test="operatorId != null" >
+        operator_id,
+      </if>
+      <if test="siteId != null" >
+        site_id,
+      </if>
+      <if test="customerOrderSn != null" >
+        customer_order_sn,
+      </if>
+      <if test="languageSite != null" >
+        language_site,
+      </if>
+      <if test="orderAmount != null" >
+        order_amount,
+      </if>
+      <if test="goodsNum != null" >
+        goods_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tmsOrderId != null" >
+        #{tmsOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="waybillNo != null" >
+        #{waybillNo,jdbcType=CHAR},
+      </if>
+      <if test="shippingId != null" >
+        #{shippingId,jdbcType=INTEGER},
+      </if>
+      <if test="customerOrderId != null" >
+        #{customerOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="trackingNo != null" >
+        #{trackingNo,jdbcType=VARCHAR},
+      </if>
+      <if test="depotId != null" >
+        #{depotId,jdbcType=INTEGER},
+      </if>
+      <if test="orderType != null" >
+        #{orderType,jdbcType=TINYINT},
+      </if>
+      <if test="rate != null" >
+        #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="codAmount != null" >
+        #{codAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingFee != null">
+        #{shippingFee,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingStatus != null" >
+        #{shippingStatus,jdbcType=TINYINT},
+      </if>
+      <if test="customerAccount != null" >
+        #{customerAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="routeCode != null" >
+        #{routeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=INTEGER},
+      </if>
+      <if test="shippedTime != null" >
+        #{shippedTime,jdbcType=INTEGER},
+      </if>
+      <if test="departureTime != null" >
+        #{departureTime,jdbcType=INTEGER},
+      </if>
+      <if test="arrivalTime != null" >
+        #{arrivalTime,jdbcType=INTEGER},
+      </if>
+      <if test="deliveredTime != null" >
+        #{deliveredTime,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreated != null" >
+        #{gmtCreated,jdbcType=INTEGER},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=INTEGER},
+      </if>
+      <if test="tax != null" >
+        #{tax,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="siteId != null" >
+        #{siteId,jdbcType=TINYINT},
+      </if>
+      <if test="customerOrderSn != null" >
+        #{customerOrderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="languageSite != null" >
+        #{languageSite,jdbcType=TINYINT},
+      </if>
+      <if test="orderAmount != null" >
+        #{orderAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsNum != null" >
+        #{goodsNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxl.job.model.TmsOrderInfo" >
+    update tms_order_info
+    <set >
+      <if test="waybillNo != null" >
+        waybill_no = #{waybillNo,jdbcType=CHAR},
+      </if>
+      <if test="shippingId != null" >
+        shipping_id = #{shippingId,jdbcType=INTEGER},
+      </if>
+      <if test="customerOrderId != null" >
+        customer_order_id = #{customerOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="trackingNo != null" >
+        tracking_no = #{trackingNo,jdbcType=VARCHAR},
+      </if>
+      <if test="depotId != null" >
+        depot_id = #{depotId,jdbcType=INTEGER},
+      </if>
+      <if test="orderType != null" >
+        order_type = #{orderType,jdbcType=TINYINT},
+      </if>
+      <if test="rate != null" >
+        rate = #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="currency != null" >
+        currency = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="codAmount != null" >
+        cod_amount = #{codAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingFee != null">
+        shipping_fee = #{shippingFee,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingStatus != null" >
+        shipping_status = #{shippingStatus,jdbcType=TINYINT},
+      </if>
+      <if test="customerAccount != null" >
+        customer_account = #{customerAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="routeCode != null" >
+        route_code = #{routeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=INTEGER},
+      </if>
+      <if test="shippedTime != null" >
+        shipped_time = #{shippedTime,jdbcType=INTEGER},
+      </if>
+      <if test="departureTime != null" >
+        departure_time = #{departureTime,jdbcType=INTEGER},
+      </if>
+      <if test="arrivalTime != null" >
+        arrival_time = #{arrivalTime,jdbcType=INTEGER},
+      </if>
+      <if test="deliveredTime != null" >
+        delivered_time = #{deliveredTime,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreated != null" >
+        gmt_created = #{gmtCreated,jdbcType=INTEGER},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=INTEGER},
+      </if>
+      <if test="operatorId != null" >
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="siteId != null" >
+        site_id = #{siteId,jdbcType=TINYINT},
+      </if>
+      <if test="customerOrderSn != null" >
+        customer_order_sn = #{customerOrderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="languageSite != null" >
+        language_site = #{languageSite,jdbcType=TINYINT},
+      </if>
+      <if test="orderAmount != null" >
+        order_amount = #{orderAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsNum != null" >
+        goods_num = #{goodsNum,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where tms_order_id = #{tmsOrderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxl.job.model.TmsOrderInfo" >
+    update tms_order_info
+    set waybill_no = #{waybillNo,jdbcType=CHAR},
+      customer_order_id = #{customerOrderId,jdbcType=INTEGER},
+      tracking_no = #{trackingNo,jdbcType=VARCHAR},
+      depot_id = #{depotId,jdbcType=INTEGER},
+      order_type = #{orderType,jdbcType=TINYINT},
+      rate = #{rate,jdbcType=DECIMAL},
+      currency = #{currency,jdbcType=VARCHAR},
+      cod_amount = #{codAmount,jdbcType=DECIMAL},
+      shipping_fee=#{shipppingFee,jdbcType=DECIMAL},
+      shipping_status = #{shippingStatus,jdbcType=TINYINT},
+      customer_account = #{customerAccount,jdbcType=VARCHAR},
+      route_code = #{routeCode,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=INTEGER},
+      shipped_time = #{shippedTime,jdbcType=INTEGER},
+      departure_time = #{departureTime,jdbcType=INTEGER},
+      arrival_time = #{arrivalTime,jdbcType=INTEGER},
+      delivered_time = #{deliveredTime,jdbcType=INTEGER},
+      gmt_created = #{gmtCreated,jdbcType=INTEGER},
+      gmt_modified = #{gmtModified,jdbcType=INTEGER},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      site_id = #{siteId,jdbcType=TINYINT},
+      customer_order_sn = #{customerOrderSn,jdbcType=VARCHAR},
+      language_site = #{languageSite,jdbcType=TINYINT},
+      order_amount = #{orderAmount,jdbcType=DECIMAL},
+      goods_num = #{goodsNum, jdbcType=INTEGER}
+    where tms_order_id = #{tmsOrderId,jdbcType=INTEGER}
+  </update>
+
+
+  <sql id="fromSql">
+    from tms_order_info o
+    left join tms_shipping s on o.route_code = s.shipping_code
+    <if test="consigneeCountry != null">
+      left join tms_order_user_info u on o.tms_order_id = u.tms_order_id
+    </if>
+  </sql>
+
+  <sql id="whereSql">
+    <where>
+      <trim prefixOverrides="AND | OR">
+        <if test="customerOrderId != null">
+          AND o.customer_order_id = #{customerOrderId}
+        </if>
+        <if test="customerOrderSn != null">
+          AND o.customer_order_sn = #{customerOrderSn}
+        </if>
+        <if test="trackingNo != null">
+          AND o.tracking_no = #{trackingNo}
+        </if>
+        <if test="waybill != null">
+          AND o.waybill_no = #{waybill}
+        </if>
+        <if test="carrierId != null">
+          AND (s.carrier_domestic_transport_id = #{carrierId} OR s.carrier_export_customsclearance_id = #{carrierId}
+          OR s.carrier_international_line_id = #{carrierId} OR s.carrier_aimcountry_customsclearance_id = #{carrierId}
+          OR s.carrier_aimcountry_line_id = #{carrierId} OR s.carrier_terminal_delivery_id = #{carrierId}
+          )
+        </if>
+        <if test="depotId != null">
+          AND o.depot_id = #{depotId}
+        </if>
+        <if test="orderType != null">
+          AND o.order_type = #{orderType}
+        </if>
+        <if test="createdTimeStart != null">
+          AND o.created_time >= #{createdTimeStart}
+        </if>
+        <if test="createdTimeEnd != null" >
+          AND #{createdTimeEnd} > o.created_time
+        </if>
+        <if test="ShippedTimeStart != null">
+          AND o.shipped_time >= #{ShippedTimeStart}
+        </if>
+        <if test="ShippedTimeEnd != null" >
+          AND #{ShippedTimeEnd} > o.shipped_time
+        </if>
+        <if test="departureTimeStart != null">
+          AND o.departure_time >= #{departureTimeStart}
+        </if>
+        <if test="departureTimeEnd != null" >
+          AND #{departureTimeEnd} > o.departure_time
+        </if>
+        <if test="arrivalTimeStart != null">
+          AND o.arrival_time >= #{arrivalTimeStart}
+        </if>
+        <if test="arrivalTimeEnd != null" >
+          AND #{arrivalTimeEnd} > o.arrival_time
+        </if>
+        <if test="deliveredTimeStart != null">
+          AND o.delivered_time >= #{deliveredTimeStart}
+        </if>
+        <if test="deliveredTimeEnd != null" >
+          AND #{deliveredTimeEnd} > o.delivered_time
+        </if>
+        <if test="shippingStatus != null">
+          AND o.shipping_status = #{shippingStatus}
+        </if>
+        <if test="consigneeCountry != null" >
+          AND u.consignee_country = #{consigneeCountry}
+        </if>
+        <if test="customerAccount != null">
+          AND o.customer_account = #{customerAccount}
+        </if>
+        <if test="siteId != null">
+          AND o.site_id = #{siteId}
+        </if>
+        <if test="customerOrderSn != null">
+          AND o.customer_order_sn = #{customerOrderSn}
+        </if>
+      </trim>
+    </where>
+  </sql>
+
+
+
+  <select id="queryByCustomerOrderIdInList" parameterType="java.util.List" resultType="java.util.Map">
+    select o.customer_order_id as customerOrderId, o.tracking_no as trackingNo, o.route_code as routeCode, o. order_type as orderType, r.region_name as destinationCountry
+    from tms_order_info o
+      left join tms_order_user_info u on o.tms_order_id = u.tms_order_id
+      left join tms_region r on u.consignee_country = r.region_id
+    where
+    o.customer_order_id in
+    <foreach collection="list" open="(" item="item" separator="," close=")">
+      #{item}
+    </foreach>
+
+  </select>
+
+
+  <select id="getOrderShippingInfo" parameterType="map" resultType="com.xxl.job.vo.TmsOrderInfoVO">
+    SELECT a.customer_order_id as customerOrderId,b.consignee_country as country,
+    b.consignee_country_name as countryName,c.shipping_id as shippingId,
+    c.shipping_name as shippingName,d.telphone as telephone,e.track_link as trackLink,f.package_num as packageNum
+    FROM tms_order_info a
+    LEFT JOIN tms_order_user_info b ON a.tms_order_id = b.tms_order_id
+    LEFT JOIN tms_shipping c ON a.shipping_id = c.shipping_id
+    LEFT JOIN tms_shipping_country_telphone d ON a.shipping_id = d.shipping_id
+    LEFT JOIN tms_carrier e ON c.carrier_terminal_delivery_id = e.carrier_id
+    LEFT JOIN tms_order_package f ON a.tms_order_id = f.tms_order_id
+    WHERE d.country_id = b.consignee_country
+    <if test="shippingId != null and  shippingId != 0">
+      AND a.shipping_id = #{shippingId}
+    </if>
+    AND a.customer_order_id = #{orderId} limit 1
+  </select>
+
+  <select id="getOrderInfoByCustomerOrderId" parameterType="map" resultType="com.xxl.job.vo.TmsOrderInfoVO">
+    SELECT a.customer_order_id as customerOrderId,b.consignee_country as country,
+    b.consignee_country_name as countryName,a.shipping_id as shippingId,
+    f.package_num as packageNum
+    FROM tms_order_info a
+    LEFT JOIN tms_order_user_info b ON a.tms_order_id = b.tms_order_id
+    LEFT JOIN tms_order_package f ON a.tms_order_id = f.tms_order_id
+    WHERE a.customer_order_id = #{orderId}
+    <if test="shippingId != null and  shippingId != 0">
+      AND a.shipping_id = #{shippingId}
+    </if>
+    limit 1
+  </select>
+
+  <select id="getShippingInfoByShippingId" parameterType="map" resultType="com.xxl.job.vo.TmsOrderInfoVO">
+    select
+    c.shipping_name as shippingName,d.telphone as telephone,e.track_link as trackLink
+    from
+    tms_shipping c
+    LEFT JOIN tms_shipping_country_telphone d ON c.shipping_id = d.shipping_id
+    LEFT JOIN tms_carrier e ON c.carrier_terminal_delivery_id = e.carrier_id
+    WHERE
+    c.shipping_id = #{shippingId}
+    limit 1
+  </select>
+
+
+  <select id="queryByShippingNoAndOrderIdMap" parameterType="Map" resultType="java.util.Map">
+    select o.customer_order_id as customerOrderId,o.tracking_no as shippingNo, o.customer_order_sn as customerOrderSn, o.route_code as routeCode, o. order_type as orderType, u.consignee_country as consigneeCountry
+    from tms_order_info o,
+    tms_order_user_info u
+    where o.tms_order_id = u.tms_order_id and
+    (o.tracking_no, o.customer_order_id)  in
+    <foreach collection="entryParam" open="((" item="item" separator="),(" close="))">
+      #{item.key}, #{item.value}
+    </foreach>
+  </select>
+
+  <select id="findByTrackingNo" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from tms_order_info
+    where tracking_no = #{trackingNo}  limit 1
+  </select>
+    <select id="queryCustomerOrderIdPaged" parameterType="map" resultType="java.lang.Integer">
+    SELECT customer_order_id from tms_order_info
+    ORDER BY tms_order_id
+    limit #{offset}, #{max}
+  </select>
+
+  <select id="count" resultType="java.lang.Integer">
+    SELECT count(*) from tms_order_info
+  </select>
+
+
+  <sql id="notShippedFromSql">
+    from tms_order_info o
+    left join tms_shipping s on o.route_code = s.shipping_code
+  </sql>
+
+  <sql id="notShippedWhereSql">
+    WHERE o.shipping_status = 0
+    and (o.customer_order_id, o.tracking_no) in
+    <foreach collection="orderInfoList" open="((" item="item" separator="),(" close="))">
+      #{item.orderId}, #{item.invoiceNo}
+    </foreach>
+  </sql>
+</mapper>

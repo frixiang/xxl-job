@@ -28,3 +28,5 @@ hs_err_pid*
 /target/
 /.idea/
 /.github/
+/xxl-job-executor-samples/xxl-job-executor-sample-spring/xxl-job-executor-sample-spring.iml
+/xxl-job-executor-samples/xxl-job-executor-sample-spring/target/maven-status/

@@ -12,10 +12,11 @@
 		<property name="locations">
 			<list>
 				<value>classpath*:xxl-job-executor.properties</value>
+				<value>classpath:datasource.properties</value>
 			</list>
 		</property>
 	</bean>
-
+	<import resource="datasource.config.xml"/>
     <!-- ********************************* 基础配置 ********************************* -->
 
 	<!-- 配置01、JobHandler 扫描路径 -->
@@ -39,5 +40,24 @@
 		<property name="logRetentionDays" value="${xxl.job.executor.logretentiondays}" />
 	</bean>
 
+	<bean id="sqlSessionFactory_tms" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>
+		<property name="mapperLocations" value="classpath:/mapper/*.xml"/>
+		<property name="dataSource" ref="dataSource_tms"/>
+	</bean>
 
+	<bean id="sqlSession_tms" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory_tms"/>
+	</bean>
+
+	<bean id="tmsTransactionManager"
+		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource_tms"/>
+	</bean>
+
+	<context:component-scan base-package="com.xxl.job">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<context:annotation-config/>
 </beans>
