@@ -12,15 +12,14 @@
 		<property name="locations">
 			<list>
 				<value>classpath*:xxl-job-executor.properties</value>
-				<value>classpath:datasource.properties</value>
+				<value>classpath*:datasource.properties</value>
 			</list>
 		</property>
 	</bean>
 	<import resource="datasource.config.xml"/>
     <!-- ********************************* 基础配置 ********************************* -->
-
-	<!-- 配置01、JobHandler 扫描路径 -->
-	<context:component-scan base-package="com.xxl.job.executor.service.jobhandler" />
+	<context:annotation-config />
+	<context:component-scan base-package="com.xxl.job"/>
 
 	<!-- 配置02、执行器 -->
 	<bean id="xxlJobExecutor" class="com.xxl.job.core.executor.XxlJobExecutor" init-method="start" destroy-method="destroy" >
@@ -55,9 +54,4 @@
 		<property name="dataSource" ref="dataSource_tms"/>
 	</bean>
 
-	<context:component-scan base-package="com.xxl.job">
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-	</context:component-scan>
-
-	<context:annotation-config/>
 </beans>

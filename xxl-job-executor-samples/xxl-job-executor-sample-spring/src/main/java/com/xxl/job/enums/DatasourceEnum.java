@@ -5,5 +5,5 @@ package com.xxl.job.enums;
  * on 17/3/29.
  */
 public enum DatasourceEnum {
-    BRAND, BRAND_READ, TMS, OMS
+    TMS
 }

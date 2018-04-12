@@ -357,13 +357,25 @@
     where tms_order_id = #{tmsOrderId,jdbcType=INTEGER}
   </update>
 
+  <select id="queryTmsOrderInfoVOListByParams" parameterType="map" resultType="com.xxl.job.vo.TmsOrderInfoVO">
+    SELECT o.tms_order_id AS tmsOrderId, o.waybill_no AS waybillNo, o.tracking_no AS trackingNo, o.customer_account AS customerAccount, o.depot_id AS depotId, o.shipping_status AS shippingStatus,o.site_id AS siteId,o.customer_order_id  as customerOrderId,o.shipping_id as shippingId
+    <include refid="fromSql" />
+    <include refid="whereSql" />
+    ORDER BY o.gmt_created DESC
+    <if test="max != null and offset != null">
+      limit #{offset}, #{max}
+    </if>
+  </select>
+
+  <select id="queryTmsOrderInfoVOCountByParams" parameterType="map" resultType="java.lang.Long">
+    select count(*)
+    <include refid="fromSql" />
+    <include refid="whereSql" />
+  </select>
+
 
   <sql id="fromSql">
     from tms_order_info o
-    left join tms_shipping s on o.route_code = s.shipping_code
-    <if test="consigneeCountry != null">
-      left join tms_order_user_info u on o.tms_order_id = u.tms_order_id
-    </if>
   </sql>
 
   <sql id="whereSql">
@@ -380,12 +392,6 @@
         </if>
         <if test="waybill != null">
           AND o.waybill_no = #{waybill}
-        </if>
-        <if test="carrierId != null">
-          AND (s.carrier_domestic_transport_id = #{carrierId} OR s.carrier_export_customsclearance_id = #{carrierId}
-          OR s.carrier_international_line_id = #{carrierId} OR s.carrier_aimcountry_customsclearance_id = #{carrierId}
-          OR s.carrier_aimcountry_line_id = #{carrierId} OR s.carrier_terminal_delivery_id = #{carrierId}
-          )
         </if>
         <if test="depotId != null">
           AND o.depot_id = #{depotId}
@@ -425,9 +431,6 @@
         </if>
         <if test="shippingStatus != null">
           AND o.shipping_status = #{shippingStatus}
-        </if>
-        <if test="consigneeCountry != null" >
-          AND u.consignee_country = #{consigneeCountry}
         </if>
         <if test="customerAccount != null">
           AND o.customer_account = #{customerAccount}

@@ -1,21 +1,15 @@
-package com.xxl.job.dao;
+package com.xxl.job.services;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageInfo;
 import com.xxl.job.model.TmsOrderInfo;
-import com.xxl.job.page.Pagination;
 import com.xxl.job.vo.TmsOrderInfoVO;
 
 import java.util.List;
 import java.util.Map;
 
 /**
-* Created by norris
-* on 2017-07-21 17:28:57.
-*/
-public interface TmsOrderInfoDao extends BaseDao<TmsOrderInfo> {
-
-
+ * Created by WIN7 on 2018/4/12.
+ */
+public interface TmsOrderService {
     List<Map<String, Object>> queryByCustomerOrderSnInList(List<String> orderSns);
 
     /**
@@ -72,8 +66,13 @@ public interface TmsOrderInfoDao extends BaseDao<TmsOrderInfo> {
 
     List<Map<String, Object>> queryByCustomerOrderIdInList(List<Integer> orderIds);
 
-    List<TmsOrderInfoVO> queryTmsOrderInfoVOListByParams(Map<String, Object> searchParam);
 
-    Long queryTmsOrderInfoVOCountByParams(Map<String, Object> searchParam);
-
+    /**
+     * 分页获取数据
+     * @param params
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    List<TmsOrderInfoVO> queryByPage(Map<String,Object> params, Integer pageNum, Integer pageSize);
 }

@@ -1,11 +1,18 @@
 package com.xxl.job.executor.service.jobhandler;
 
+import com.google.common.collect.Maps;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.handler.IJobHandler;
 import com.xxl.job.core.handler.annotation.JobHandler;
 import com.xxl.job.core.log.XxlJobLogger;
+import com.xxl.job.model.TmsOrderInfo;
+import com.xxl.job.services.TmsOrderService;
+import com.xxl.job.vo.TmsOrderInfoVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
@@ -23,11 +30,18 @@ import java.util.concurrent.TimeUnit;
 @JobHandler(value="demoJobHandler")
 @Component
 public class DemoJobHandler extends IJobHandler {
-
+	@Autowired
+	private TmsOrderService tmsOrderService;
 	@Override
 	public ReturnT<String> execute(String param) throws Exception {
 		XxlJobLogger.log("XXL-JOB, Hello World.");
-		
+
+
+		Map<String,Object> params = Maps.newHashMap();
+		List<TmsOrderInfoVO> delList = tmsOrderService.queryByPage(params,1,500);
+
+		XxlJobLogger.log(delList.size() + "+++++++++++++");
+
 		for (int i = 0; i < 5; i++) {
 			XxlJobLogger.log("beat at:" + i);
 			TimeUnit.SECONDS.sleep(2);

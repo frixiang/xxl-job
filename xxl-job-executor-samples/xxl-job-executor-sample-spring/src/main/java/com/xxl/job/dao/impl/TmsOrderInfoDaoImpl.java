@@ -1,9 +1,11 @@
 package com.xxl.job.dao.impl;
 
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;
 import com.xxl.job.dao.TmsOrderInfoDao;
 import com.xxl.job.enums.DatasourceEnum;
 import com.xxl.job.model.TmsOrderInfo;
+import com.xxl.job.page.Pagination;
 import com.xxl.job.vo.TmsOrderInfoVO;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
@@ -122,6 +124,16 @@ public class TmsOrderInfoDaoImpl extends BaseDaoImpl<TmsOrderInfo> implements Tm
     @Override
     public Integer updateSegmentedInteract(TmsOrderInfo tmsOrderInfo){
         return 0;
+    }
+
+    @Override
+    public List<TmsOrderInfoVO> queryTmsOrderInfoVOListByParams(Map<String, Object> searchParam) {
+        return getSqlSession().selectList(this.clazz.getName() + "Mapper.queryTmsOrderInfoVOListByParams", searchParam);
+    }
+
+    @Override
+    public Long queryTmsOrderInfoVOCountByParams(Map<String, Object> searchParam) {
+        return getSqlSession().selectOne(this.clazz.getName() + "Mapper.queryTmsOrderInfoVOCountByParams", searchParam);
     }
 
 }

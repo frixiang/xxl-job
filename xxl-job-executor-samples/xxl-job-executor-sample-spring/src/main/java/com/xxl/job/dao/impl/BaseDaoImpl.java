@@ -28,11 +28,8 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
     @Resource(name = "sqlSession_tms")
     protected SqlSession sqlSession_tms;
 
-
-
-
     protected DatasourceEnum getSqlSessionType() {
-        return DatasourceEnum.BRAND;
+        return DatasourceEnum.TMS;
     }
 
     public SqlSession getSqlSession(DatasourceEnum sqlSessionType) {
