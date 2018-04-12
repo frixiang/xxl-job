@@ -118,12 +118,12 @@ public class TmsOrderInfoDaoImpl extends BaseDaoImpl<TmsOrderInfo> implements Tm
 
     /**
      * 更新分段运输标记
-     * @param tmsOrderInfo
+     * @param tmsOrderInfoVO
      * @return
      */
     @Override
-    public Integer updateSegmentedInteract(TmsOrderInfo tmsOrderInfo){
-        return 0;
+    public Integer updateSegmentedInteract(TmsOrderInfoVO tmsOrderInfoVO){
+        return getSqlSession().update(this.clazz.getName() + "Mapper.updateSegmentedInteract", tmsOrderInfoVO);
     }
 
     @Override

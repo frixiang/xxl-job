@@ -55,4 +55,10 @@ public class TmsOrderInfoVO extends TmsOrderInfo{
 
     private Byte interactType;
     private String interactTypeName;
+
+    private Integer isSegmentedInteract;
+
+    private Integer segmentedInteractTime;
+
+    private String segmentedShippingNo;
 }

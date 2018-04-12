@@ -39,7 +39,7 @@ public interface TmsOrderInfoDao extends BaseDao<TmsOrderInfo> {
      * @param tmsOrderInfo
      * @return
      */
-    Integer updateSegmentedInteract(TmsOrderInfo tmsOrderInfo);
+    Integer updateSegmentedInteract(TmsOrderInfoVO tmsOrderInfo);
 
 
     /**

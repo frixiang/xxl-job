@@ -107,7 +107,7 @@ public class TmsOrderServiceImpl implements TmsOrderService {
      * @return
      */
     @Override
-    public Integer updateSegmentedInteract(TmsOrderInfo tmsOrderInfo){
+    public Integer updateSegmentedInteract(TmsOrderInfoVO tmsOrderInfo){
         return tmsOrderInfoDao.updateSegmentedInteract(tmsOrderInfo);
     }
 

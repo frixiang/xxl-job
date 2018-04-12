@@ -532,17 +532,19 @@
     SELECT count(*) from tms_order_info
   </select>
 
-
-  <sql id="notShippedFromSql">
-    from tms_order_info o
-    left join tms_shipping s on o.route_code = s.shipping_code
-  </sql>
-
-  <sql id="notShippedWhereSql">
-    WHERE o.shipping_status = 0
-    and (o.customer_order_id, o.tracking_no) in
-    <foreach collection="orderInfoList" open="((" item="item" separator="),(" close="))">
-      #{item.orderId}, #{item.invoiceNo}
-    </foreach>
-  </sql>
+  <update id="updateSegmentedInteract" parameterType="com.xxl.job.vo.TmsOrderInfoVO">
+    UPDATE tms_order_info
+    <set>
+      <if test="isSegmentedInteract != null">
+        is_segmented_interact = #{isSegmentedInteract,jdbcType=TINYINT},
+      </if>
+      <if test="segmentedInteractTime != null">
+        segmented_interact_time = #{segmentedInteractTime,jdbcType=INTEGER},
+      </if>
+      <if test="segmentedShippingNo != null">
+        segmented_shipping_no = #{segmentedShippingNo,jdbcType=INTEGER},
+      </if>
+    </set>
+    WHERE customer_order_id = #{customerOrderId} AND tracking_no = #{trackingNo}
+  </update>
 </mapper>

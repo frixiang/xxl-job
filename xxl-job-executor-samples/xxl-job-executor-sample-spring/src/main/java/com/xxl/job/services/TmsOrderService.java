@@ -33,7 +33,7 @@ public interface TmsOrderService {
      * @param tmsOrderInfo
      * @return
      */
-    Integer updateSegmentedInteract(TmsOrderInfo tmsOrderInfo);
+    Integer updateSegmentedInteract(TmsOrderInfoVO tmsOrderInfo);
 
 
     /**
