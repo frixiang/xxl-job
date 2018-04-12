@@ -7,6 +7,12 @@
 		<layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%-d{yyyy-MM-dd HH:mm:ss} xxl-job-executor-sample-spring [%c]-[%t]-[%M]-[%L]-[%p] %m%n"/>
 		</layout>
+        <!--过滤器设置输出的级别-->
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="debug" />
+            <param name="levelMax" value="warn" />
+            <param name="AcceptOnMatch" value="true" />
+        </filter>
 	</appender>
 	
     <appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
@@ -19,15 +25,10 @@
     </appender>
 
     <root>
-        <level value="INFO" />
+        <level value="DEBUG" />
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="FILE" />
     </root>
 
-    <!--<logger name="com.xxl.job.executor.service.jobhandler" additivity="false">
-        <level value="INFO" />
-        <appender-ref ref="CONSOLE" />
-        <appender-ref ref="FILE" />
-    </logger>-->
 
 </log4j:configuration>
