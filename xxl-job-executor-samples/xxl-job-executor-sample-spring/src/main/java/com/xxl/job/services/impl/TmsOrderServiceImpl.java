@@ -1,20 +1,15 @@
 package com.xxl.job.services.impl;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.xxl.job.dao.TmsOrderInfoDao;
-import com.xxl.job.enums.DatasourceEnum;
 import com.xxl.job.model.TmsOrderInfo;
 import com.xxl.job.page.PageInfo;
-import com.xxl.job.page.Pagination;
 import com.xxl.job.services.TmsOrderService;
 import com.xxl.job.vo.TmsOrderInfoVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +21,8 @@ public class TmsOrderServiceImpl implements TmsOrderService {
 
     @Autowired
     private TmsOrderInfoDao tmsOrderInfoDao;
+
+    private Logger logger = LoggerFactory.getLogger(TmsOrderServiceImpl.class);
 
     @Override
     public List<Map<String, Object>> queryByCustomerOrderIdInList(List<Integer> orderIds) {
